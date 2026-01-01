@@ -361,3 +361,12 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# WeatherForecastAPI specific
+weather.db
+weather.db-shm
+weather.db-wal
+data/
+.env
+.env.local
+.DS_Store
