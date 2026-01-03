@@ -17,23 +17,23 @@ public class GlobalExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
-        _logger.LogError(exception, "An error occurred: {Message}", exception.Message);
+        _logger.LogError(exception, "Error occurred: {Message}", exception.Message);
+
+        var statusCode = exception switch
+        {
+            ArgumentException or ArgumentOutOfRangeException => StatusCodes.Status400BadRequest,
+            KeyNotFoundException => StatusCodes.Status404NotFound,
+            _ => StatusCodes.Status500InternalServerError
+        };
 
         var problemDetails = new ProblemDetails
         {
+            Status = statusCode,
             Title = "An error occurred",
-            Status = exception switch
-            {
-                InvalidOperationException => StatusCodes.Status503ServiceUnavailable,
-                ArgumentException => StatusCodes.Status400BadRequest,
-                KeyNotFoundException => StatusCodes.Status404NotFound,
-                _ => StatusCodes.Status500InternalServerError
-            },
-            Detail = exception.Message,
-            Instance = httpContext.Request.Path
+            Detail = exception.Message
         };
 
-        httpContext.Response.StatusCode = problemDetails.Status.Value;
+        httpContext.Response.StatusCode = statusCode;
         await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 
         return true;

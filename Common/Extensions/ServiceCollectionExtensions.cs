@@ -45,7 +45,6 @@ public static class ServiceCollectionExtensions
                 .AddUrlGroup(new Uri(openMeteoConfig["HealthCheckUrl"]!), name: "Open-Meteo API")
                 .AddUrlGroup(new Uri(ipApiConfig["HealthCheckUrl"]!), name: "IP-Geolocation API");
 
-        // FastEndpoints
         services.AddFastEndpoints();
         services.SwaggerDocument(o =>
         {
@@ -57,10 +56,8 @@ public static class ServiceCollectionExtensions
             };
         });
 
-        // Exception Handler
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
-
 
         return services;
     }
@@ -79,9 +76,9 @@ public static class ServiceCollectionExtensions
         if (!await db.Locations.AnyAsync())
         {
             db.Locations.AddRange(
-                new Location { Latitude = 52.2297m, Longitude = 21.0122m, Name = "Warsaw" },
-                new Location { Latitude = 51.5074m, Longitude = -0.1278m, Name = "London" },
-                new Location { Latitude = 40.7128m, Longitude = -74.0060m, Name = "New York" }
+                Location.Create(Coordinates.Create(52.2297m, 21.0122m), "Warsaw"),
+                Location.Create(Coordinates.Create(51.5074m, -0.1278m), "London"),
+                Location.Create(Coordinates.Create(40.7128m, -74.0060m), "New York")
             );
 
             await db.SaveChangesAsync();
@@ -89,6 +86,7 @@ public static class ServiceCollectionExtensions
 
         return app;
     }
+
     private static void ConfigureStandardResilience(HttpStandardResilienceOptions options)
     {
         options.AttemptTimeout.Timeout = TimeSpan.FromSeconds(5);
@@ -103,5 +101,4 @@ public static class ServiceCollectionExtensions
         options.CircuitBreaker.SamplingDuration = TimeSpan.FromSeconds(30);
         options.CircuitBreaker.BreakDuration = TimeSpan.FromSeconds(30);
     }
-
 }
