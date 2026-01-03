@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Polly.CircuitBreaker;
 
 namespace WeatherForecastAPI.Common.Exceptions;
 
@@ -23,13 +24,21 @@ public class GlobalExceptionHandler : IExceptionHandler
         {
             ArgumentException or ArgumentOutOfRangeException => StatusCodes.Status400BadRequest,
             KeyNotFoundException => StatusCodes.Status404NotFound,
+            BrokenCircuitException => StatusCodes.Status503ServiceUnavailable,
+            HttpRequestException => StatusCodes.Status502BadGateway,
+            TaskCanceledException when !cancellationToken.IsCancellationRequested => StatusCodes.Status504GatewayTimeout,
             _ => StatusCodes.Status500InternalServerError
         };
 
         var problemDetails = new ProblemDetails
         {
             Status = statusCode,
-            Title = "An error occurred",
+            Title = statusCode switch
+            {
+                503 => "External Service Unavailable (Circuit Breaker)",
+                504 => "External Service Timeout",
+                _ => "An error occurred"
+            },
             Detail = exception.Message
         };
 

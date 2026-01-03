@@ -10,7 +10,7 @@ public class WeatherForecast : BaseEntity
     public Temperature Temperature { get; private set; } = null!;
     public WindSpeed WindSpeed { get; private set; } = null!;
     public int WeatherCode { get; private set; }
-    public DateTimeOffset RetrievedAt { get; private set; }
+    public DateTime RetrievedAt { get; private set; }
 
     public Location Location { get; private set; } = null!;
 
@@ -37,7 +37,7 @@ public class WeatherForecast : BaseEntity
             Temperature = temperature,
             WindSpeed = windSpeed,
             WeatherCode = weatherCode,
-            RetrievedAt = DateTimeOffset.UtcNow
+            RetrievedAt = DateTime.UtcNow
         };
     }
 }

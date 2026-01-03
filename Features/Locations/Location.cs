@@ -6,7 +6,7 @@ public class Location : BaseEntity
 {
     public Coordinates Coordinates { get; private set; } = null!;
     public string? Name { get; private set; }
-    public DateTimeOffset? LastUsedAt { get; private set; }  // Potential good use case for TimeProvider
+    public DateTime LastUsedAt { get; private set; }  // Potential good use case for TimeProvider
 
     private readonly List<Weather.WeatherForecast> _weatherForecasts = new();
     public IReadOnlyCollection<Weather.WeatherForecast> WeatherForecasts => _weatherForecasts.AsReadOnly();
@@ -20,13 +20,13 @@ public class Location : BaseEntity
         {
             Coordinates = coordinates,
             Name = name,
-            LastUsedAt = DateTimeOffset.UtcNow
+            LastUsedAt = DateTime.UtcNow
         };
     }
 
     public void UpdateUsage()
     {
-        LastUsedAt = DateTimeOffset.UtcNow;
+        LastUsedAt = DateTime.UtcNow;
     }
 
     public void SetName(string name)

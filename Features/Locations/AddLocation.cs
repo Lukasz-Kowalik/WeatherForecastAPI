@@ -16,8 +16,8 @@ public record LocationResponse(
     decimal Latitude,
     decimal Longitude,
     string? Name,
-    DateTimeOffset CreatedAt,
-    DateTimeOffset? LastUsedAt
+    DateTime CreatedAt,
+    DateTime LastUsedAt
 );
 
 public class AddLocation(ApplicationDbContext db) : Endpoint<AddLocationRequest, LocationResponse>
@@ -32,8 +32,6 @@ public class AddLocation(ApplicationDbContext db) : Endpoint<AddLocationRequest,
             s.Summary = "Add a new location";
             s.Description = "Creates a new location or returns existing one if coordinates already exist";
             s.ExampleRequest = new AddLocationRequest(52.2297m, 21.0122m, "Warsaw");
-
-            // Response descriptions
             s.Response(200, "Location already exists, returning existing record");
             s.Response(201, "New location created successfully");
             s.Response(400, "Invalid request - check coordinates range");
