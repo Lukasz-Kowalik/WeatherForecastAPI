@@ -69,7 +69,6 @@ To respect Open-Meteo's rate limits and improve performance:
 - `GET /api/locations` - List all locations (ordered by most recently used)
 - `POST /api/locations` - Add a new location
 - `DELETE /api/locations/{id}` - Delete a location by ID
-- `DELETE /api/locations/by-coordinates?latitude=X&longitude=Y` - Delete a location by coordinates
 
 ### Weather
 - `GET /api/weather/locations/{id}` - Get weather for a specific location
