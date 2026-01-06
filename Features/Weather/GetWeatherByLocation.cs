@@ -47,7 +47,7 @@ public class GetWeatherByLocation(
 
     public override void Configure()
     {
-        Get("/api/weather/locations/{id}");
+        Get("/weather/locations/{id}");
         AllowAnonymous();
 
         Summary(s =>

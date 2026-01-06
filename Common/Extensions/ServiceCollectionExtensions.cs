@@ -32,18 +32,9 @@ public static class ServiceCollectionExtensions
                 })
                 .AddStandardResilienceHandler(ConfigureStandardResilience);
 
-        services.AddRefitClient<IIpApiService>()
-                .ConfigureHttpClient(c =>
-                {
-                    c.BaseAddress = new Uri(ipApiConfig["BaseUrl"]!);
-                    c.Timeout = TimeSpan.FromSeconds(10);
-                })
-                .AddStandardResilienceHandler(ConfigureStandardResilience);
-
         services.AddHealthChecks()
                 .AddSqlite(connectionString!, name: "Database")
-                .AddUrlGroup(new Uri(openMeteoConfig["HealthCheckUrl"]!), name: "Open-Meteo API")
-                .AddUrlGroup(new Uri(ipApiConfig["HealthCheckUrl"]!), name: "IP-Geolocation API");
+                .AddUrlGroup(new Uri(openMeteoConfig["HealthCheckUrl"]!), name: "Open-Meteo API");
 
         services.AddFastEndpoints();
         services.SwaggerDocument(o =>

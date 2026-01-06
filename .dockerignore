@@ -1,0 +1,12 @@
+**/.vs
+**/.vscode
+**/bin
+**/obj
+**/.git
+**/.gitignore
+**/docker-compose*
+**/Dockerfile*
+**/*.md
+**/weather.db
+**/weather.db-shm
+**/weather.db-wal

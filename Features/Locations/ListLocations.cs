@@ -4,12 +4,8 @@ using WeatherForecastAPI.Common.Database;
 
 namespace WeatherForecastAPI.Features.Locations;
 
-public record LocationListResponse(
-    List<LocationResponse> Locations,
-    int TotalCount
-);
-
-public class ListLocations(ApplicationDbContext db) : EndpointWithoutRequest<LocationListResponse>
+public class ListLocations(ApplicationDbContext db)
+    : EndpointWithoutRequest<List<LocationResponse>>
 {
     public override void Configure()
     {
@@ -17,9 +13,9 @@ public class ListLocations(ApplicationDbContext db) : EndpointWithoutRequest<Loc
         AllowAnonymous();
         Summary(s =>
         {
-            s.Summary = "List all stored locations";
-            s.Description = "Returns a list of all previously used coordinates and names, ordered by the most recent activity (LastUsedAt or CreatedAt).";
-            s.Response(200, "List of locations retrieved successfully.");
+            s.Summary = "List all saved locations";
+            s.Description = "Returns all previously used locations ordered by most recently used";
+            s.Response(200, "List of locations");
             s.Response(500, "Internal server error - occurs if the database is unavailable or an unexpected error happens.");
         });
     }
@@ -39,6 +35,6 @@ public class ListLocations(ApplicationDbContext db) : EndpointWithoutRequest<Loc
             ))
             .ToListAsync(ct);
 
-        await SendAsync(new LocationListResponse(locations, locations.Count), 200, ct);
+        await SendAsync(locations, cancellation: ct);
     }
 }

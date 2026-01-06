@@ -1,0 +1,17 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: weather-api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/weather.db;Cache=Shared;Mode=ReadWriteCreate;
+      - ExternalServices__OpenMeteo__BaseUrl=https://api.open-meteo.com/
+      - ExternalServices__OpenMeteo__HealthCheckUrl=https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
