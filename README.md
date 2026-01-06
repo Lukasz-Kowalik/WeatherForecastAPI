@@ -2,7 +2,7 @@
 
 A robust, resilient RESTful API for managing weather locations and forecasts. Built with a focus on high availability, error handling, and pragmatic architecture.
 
-## ?? Quick Start (Docker)
+## 🚀 Quick Start (Docker)
 
 The application is fully containerized. To get the system up and running with all dependencies and seed data:
 
@@ -14,7 +14,7 @@ docker compose up --build
 - **Interactive Documentation (Swagger):** http://localhost:5000/swagger
 - **Health Monitoring:** http://localhost:5000/health
 
-## ?? Architecture: Vertical Slice (VSA)
+## 🏗 Architecture: Vertical Slice (VSA)
 
 Instead of traditional, over-engineered 4-project Clean Architecture, this solution uses **Vertical Slice Architecture**.
 
@@ -26,7 +26,7 @@ For a service of this scale, grouping logic by feature (Locations, Weather) rath
 - Database access is performed directly in handlers using EF Core, which is a mature implementation of the Unit of Work/Repository patterns
 - Feature-based folder structure makes navigation intuitive
 
-## ?? Resilience & "Unfortunate Conditions"
+## 🛡 Resilience & "Unfortunate Conditions"
 
 The core of this task was handling external failures. This solution implements:
 
@@ -46,7 +46,7 @@ All external calls (Open-Meteo & IP-API) are wrapped in a **StandardResilienceHa
 - Ensures no sensitive stack traces are leaked
 - Provides clear, structured feedback to clients
 
-## ?? IP & URL Geolocation
+## 🌐 IP & URL Geolocation
 
 The API supports fetching weather by IP address or Domain Name (URL) via the `GET /api/weather/by-target/{target}` endpoint.
 
@@ -56,14 +56,14 @@ Uses **ip-api.com** (a reliable, no-key-required alternative to IPStack) to reso
 ### Resilience
 This secondary API is also covered by its own circuit breaker and health checks.
 
-## ?? Caching Strategy
+## 💾 Caching Strategy
 
 To respect Open-Meteo's rate limits and improve performance:
 - Forecasts are cached in the local database for **1 hour**
 - Subsequent requests for the same location within this window are served from SQLite
 - Response includes a `fromCache: true` flag to indicate cached data
 
-## ?? API Endpoints
+## 🧪 API Endpoints
 
 ### Locations
 - `GET /api/locations` - List all locations (ordered by most recently used)
@@ -92,11 +92,11 @@ Uses `WebApplicationFactory` with an In-Memory SQLite provider to test the full 
 dotnet test
 ```
 
-## ?? Tech Stack
+## 🛠 Tech Stack
 
 | Component | Technology |
 |-----------|-----------|
-| **Runtime** | .NET 10 (latest features like Primary Constructors) |
+| **Runtime** | .NET 10 (latest) |
 | **Web Framework** | FastEndpoints (faster and cleaner than Controllers) |
 | **Database** | EF Core + SQLite |
 | **HTTP Client** | Refit (type-safe REST clients) |
@@ -142,7 +142,7 @@ WeatherForecastAPI/
 └── README.md
 ```
 
-## ?? Database Seeding
+## Database Seeding
 
 The application comes pre-seeded with 3 locations:
 - **Warsaw** (52.2297°N, 21.0122°E)
@@ -151,7 +151,7 @@ The application comes pre-seeded with 3 locations:
 
 Seed data is initialized in `ServiceCollectionExtensions.InitializeDatabaseAsync()`.
 
-## ?? Error Handling
+## Error Handling
 
 All errors are returned in RFC 7807 Problem Details format:
 
@@ -167,7 +167,7 @@ All errors are returned in RFC 7807 Problem Details format:
 }
 ```
 
-## ?? Configuration
+## Configuration
 
 Environment variables (see `docker-compose.yml`):
 - `ASPNETCORE_ENVIRONMENT` - Development/Production mode
@@ -175,7 +175,7 @@ Environment variables (see `docker-compose.yml`):
 - `ExternalServices__OpenMeteo__BaseUrl` - Open-Meteo API base URL
 - `ExternalServices__IpApi__BaseUrl` - IP-API base URL
 
-## ?? Contributing
+## Contributing
 
 When adding new features:
 1. Follow the Vertical Slice pattern - create a feature folder with endpoint, request/response, and configuration
@@ -183,6 +183,6 @@ When adding new features:
 3. Include both unit and integration tests
 4. Update this README with new endpoints
 
-## ?? License
+## License
 
 This project is provided as-is for educational and development purposes.
