@@ -108,7 +108,6 @@ dotnet test
 
 ```
 WeatherForecastAPI/
-WeatherForecastAPI/
 ├── Features/
 │   ├── Locations/
 │   │   ├── AddLocation.cs
