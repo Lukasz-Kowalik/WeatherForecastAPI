@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Tests/WeatherForecastAPI_UnitTests/WeatherForecastAPI_UnitTests.csproj" />
   <Project Path="WeatherForecastAPI.csproj" />
 </Solution>
