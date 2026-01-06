@@ -108,46 +108,47 @@ dotnet test
 
 ```
 WeatherForecastAPI/
-??? Features/
-?   ??? Locations/
-?   ?   ??? AddLocation.cs
-?   ?   ??? DeleteLocation.cs
-?   ?   ??? ListLocations.cs
-?   ?   ??? Location.cs
-?   ?   ??? LocationConfiguration.cs
-?   ??? Weather/
-?       ??? GetWeatherByLocation.cs
-?       ??? GetWeatherByTarget.cs
-?       ??? WeatherForecast.cs
-?       ??? WeatherForecastConfiguration.cs
-??? Common/
-?   ??? Database/
-?   ?   ??? ApplicationDbContext.cs
-?   ?   ??? BaseEntity.cs
-?   ??? ExternalClients/
-?   ?   ??? IOpenMeteoApi.cs
-?   ?   ??? IIpApiService.cs
-?   ??? Exceptions/
-?   ?   ??? GlobalExceptionHandler.cs
-?   ??? Extensions/
-?       ??? ServiceCollectionExtensions.cs
-??? Tests/
-?   ??? WeatherForecastAPI_IntegrationTests/
-?   ?   ??? Features/
-?   ??? WeatherForecastAPI_UnitTests/
-?       ??? Features/
-??? Program.cs
-??? Dockerfile
-??? docker-compose.yml
-??? README.md
+WeatherForecastAPI/
+├── Features/
+│   ├── Locations/
+│   │   ├── AddLocation.cs
+│   │   ├── DeleteLocation.cs
+│   │   ├── ListLocations.cs
+│   │   ├── Location.cs
+│   │   └── LocationConfiguration.cs
+│   └── Weather/
+│       ├── GetWeatherByLocation.cs
+│       ├── GetWeatherByTarget.cs
+│       ├── WeatherForecast.cs
+│       └── WeatherForecastConfiguration.cs
+├── Common/
+│   ├── Database/
+│   │   ├── ApplicationDbContext.cs
+│   │   └── BaseEntity.cs
+│   ├── ExternalClients/
+│   │   ├── IOpenMeteoApi.cs
+│   │   └── IIpApiService.cs
+│   ├── Exceptions/
+│   │   └── GlobalExceptionHandler.cs
+│   └── Extensions/
+│       └── ServiceCollectionExtensions.cs
+├── Tests/
+│   ├── WeatherForecastAPI_IntegrationTests/
+│   │   └── Features/
+│   └── WeatherForecastAPI_UnitTests/
+│       └── Features/
+├── Program.cs
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
 ```
 
 ## ?? Database Seeding
 
 The application comes pre-seeded with 3 locations:
-- **Warsaw** (52.2297�N, 21.0122�E)
-- **London** (51.5074�N, 0.1278�W)
-- **New York** (40.7128�N, 74.0060�W)
+- **Warsaw** (52.2297°N, 21.0122°E)
+- **London** (51.5074°N, 0.1278°W)
+- **New York** (40.7128°N, 74.0060°W)
 
 Seed data is initialized in `ServiceCollectionExtensions.InitializeDatabaseAsync()`.
 
