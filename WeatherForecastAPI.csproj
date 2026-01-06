@@ -31,6 +31,7 @@
   <ItemGroup>
     <ContainerPort Include="8081" />
 	<Compile Remove="Tests\**" />
+	<Content Remove="Tests\**" />
 	<EmbeddedResource Remove="Tests\**" />
 	<None Remove="Tests\**" />
   </ItemGroup>

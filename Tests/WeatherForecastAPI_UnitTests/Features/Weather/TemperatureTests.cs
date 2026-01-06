@@ -1,6 +1,4 @@
-using FluentAssertions;
 using WeatherForecastAPI.Features.Weather;
-using Xunit;
 
 namespace WeatherForecastAPI_UnitTests.Features.Weather;
 

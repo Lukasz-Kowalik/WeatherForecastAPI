@@ -107,7 +107,7 @@ public class GetWeatherByLocation(
                 "Cache hit for location {LocationId}",
                 location.Id);
 
-            await db.SaveChangesAsync(ct); 
+            await db.SaveChangesAsync(ct);
 
             var response = MapToResponse(location, location.WeatherForecasts.ToList(), fromCache: true);
             await SendAsync(response, cancellation: ct);

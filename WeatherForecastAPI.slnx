@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="Tests/WeatherForecastAPI_IntegrationTests/WeatherForecastAPI_IntegrationTests.csproj" Id="806838ac-78e3-45f9-9a31-11b447b68e39" />
   <Project Path="Tests/WeatherForecastAPI_UnitTests/WeatherForecastAPI_UnitTests.csproj" />
   <Project Path="WeatherForecastAPI.csproj" />
 </Solution>
