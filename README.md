@@ -78,7 +78,7 @@ To respect Open-Meteo's rate limits and improve performance:
 - `GET /health` - Health check endpoint
 - `GET /swagger` - Interactive API documentation
 
-## ?? Testing
+## Testing
 
 ### Unit Tests
 Focus on domain invariants (e.g., coordinate ranges, temperature logic).
@@ -103,7 +103,7 @@ dotnet test
 | **Validation** | FluentValidation |
 | **Testing** | xUnit + FluentAssertions |
 
-## ?? Project Structure
+## Project Structure
 
 ```
 WeatherForecastAPI/
