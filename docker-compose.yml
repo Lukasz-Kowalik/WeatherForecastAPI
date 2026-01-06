@@ -12,6 +12,8 @@ services:
       - ConnectionStrings__DefaultConnection=Data Source=/app/data/weather.db;Cache=Shared;Mode=ReadWriteCreate;
       - ExternalServices__OpenMeteo__BaseUrl=https://api.open-meteo.com/
       - ExternalServices__OpenMeteo__HealthCheckUrl=https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41
+      - ExternalServices__IpApi__BaseUrl=http://ip-api.com/
+      - ExternalServices__IpApi__HealthCheckUrl=http://ip-api.com/json/8.8.8.8
     volumes:
       - ./data:/app/data
     restart: unless-stopped
